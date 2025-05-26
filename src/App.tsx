@@ -9,7 +9,7 @@ import {
    PLAYER_LIST,
    type Player,
 } from "./utils/consts";
-import background from "./assets/background.jpg";
+import background from "../public/assets/background.jpg";
 
 const style: CSSProperties = {
    backgroundImage: `url(${background})`,

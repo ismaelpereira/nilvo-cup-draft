@@ -1,7 +1,7 @@
 import { type CSSProperties, type FC, useEffect, useRef } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes, type Player, type Position } from "../utils/consts";
-import bgplayer from "../assets/player_card.png";
+import bgplayer from "../../public/assets/player_card.png";
 
 const style: CSSProperties = {
    border: "1px dashed white",
