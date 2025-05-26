@@ -52,7 +52,7 @@ const TeamDropCell: FC<{
             style={{
                ...style,
                backgroundColor: isActive ? "#3A3839" : "#424041",
-               width: "150px",
+               width: "120px",
             }}
          >
             <br />
@@ -66,7 +66,7 @@ const TeamDropCell: FC<{
                      color: "white",
                      opacity: "100%",
                      fontFamily: `"League Gothic", sans-serif`,
-                     fontSize: "32px",
+                     fontSize: "24px",
                   }}
                >
                   {player.name}

@@ -119,7 +119,7 @@ export const PLAYER_LIST: Player[] = [
    },
    {
       image: "src/assets/player_images/Lent.png",
-      name: "lent",
+      name: "Lent",
       position: "Atacante",
    },
    {
@@ -184,7 +184,7 @@ export const PLAYER_LIST: Player[] = [
    },
    {
       image: "src/assets/player_images/davi_b.png",
-      name: "davi b",
+      name: "Davi B",
       position: "Meia",
    },
    {
@@ -208,11 +208,6 @@ export const PLAYER_LIST: Player[] = [
       position: "Atacante",
    },
    {
-      image: "src/assets/player_images/Esteban.png",
-      name: "Esteban",
-      position: "Defensor",
-   },
-   {
       image: "src/assets/player_images/Davi_C.png",
       name: "Davi C",
       position: "Goleiro",
@@ -222,3 +217,6 @@ export const PLAYER_LIST: Player[] = [
 export const ItemTypes = {
    BOX: "box",
 };
+
+export const LOCAL_TEAMS_KEY = "teams";
+export const LOCAL_BENCH_KEY = "benchPlayers";
