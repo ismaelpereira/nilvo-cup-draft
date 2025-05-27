@@ -125,7 +125,7 @@ export const PLAYER_LIST: Player[] = [
    {
       image: "player_images/Predo.png",
       name: "Predo",
-      position: "Defensor",
+      position: "Meia",
    },
    {
       image: "player_images/Brunin.png",
@@ -216,7 +216,7 @@ export const PLAYER_LIST: Player[] = [
       image: "player_images/Pedro_Assis.png",
       name: "Pedro Assis",
       position: "Goleiro",
-   }
+   },
 ];
 
 export const ItemTypes = {
