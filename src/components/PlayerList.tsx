@@ -63,15 +63,6 @@ export const PlayerList: FC<Props> = ({ benchPlayers }) => {
             gap: "",
          }}
       >
-         <h2
-            style={{
-               color: "white",
-               fontFamily: `"League Gothic", sans-serif`,
-               fontSize: "42px",
-            }}
-         >
-            Jogadores
-         </h2>
          <div
             style={{
                display: "flex",
@@ -82,10 +73,7 @@ export const PlayerList: FC<Props> = ({ benchPlayers }) => {
             {positions.map((pos) => {
                const players = benchPlayers.filter((p) => p.position === pos);
                return (
-                  <div
-                     key={pos}
-                     style={{ clear: "both", marginBottom: "1rem" }}
-                  >
+                  <div key={pos} style={{ clear: "both" }}>
                      <h3
                         style={{
                            color: "white",

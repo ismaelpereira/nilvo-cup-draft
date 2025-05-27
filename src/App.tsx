@@ -20,6 +20,10 @@ const style: CSSProperties = {
    backgroundSize: "100% 100%",
    margin: "0px",
    padding: "0px",
+   display: "flex",
+   gap: "1em",
+   justifyContent: "center",
+   alignItems: "center",
 };
 
 function isValidPlayerArray(data: any): data is Player[] {

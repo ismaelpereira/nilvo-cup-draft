@@ -83,7 +83,7 @@ export const TeamTable: FC<Props> = ({ teams, moveToTeam, moveToBench }) => {
    return (
       <div
          style={{
-            paddingTop: "20em",
+            paddingTop: "3em",
             display: "flex",
             justifyContent: "center",
          }}
