@@ -225,3 +225,5 @@ export const ItemTypes = {
 
 export const LOCAL_TEAMS_KEY = "teams";
 export const LOCAL_BENCH_KEY = "benchPlayers";
+
+export const ordemDesejada = ["Goleiro", "Defensor", "Meia", "Atacante"];

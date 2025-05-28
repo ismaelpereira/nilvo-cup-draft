@@ -75,7 +75,6 @@ function App() {
          ...prev,
          [teamKey]: [...prev[teamKey], player],
       }));
-      console.log(teams);
    };
 
    const moveToBench = (player: Player, teamKey: string) => {

@@ -1,6 +1,6 @@
 import { type FC, useEffect, useRef, type CSSProperties } from "react";
 import { useDrop } from "react-dnd";
-import { ItemTypes, type Player } from "../utils/consts";
+import { ItemTypes, type Player, ordemDesejada } from "../utils/consts";
 
 const style: CSSProperties = {
    color: "white",
@@ -56,22 +56,28 @@ const TeamDropCell: FC<{
             }}
          >
             <br />
-            {players.map((player) => (
-               <div
-                  key={player.name}
-                  onClick={() => moveToBench(player, teamKey)}
-                  style={{
-                     cursor: "pointer",
-                     margin: "4px",
-                     color: "white",
-                     opacity: "100%",
-                     fontFamily: `"League Gothic", sans-serif`,
-                     fontSize: "24px",
-                  }}
-               >
-                  {player.name}
-               </div>
-            ))}
+            {players
+               .sort(
+                  (a, b) =>
+                     ordemDesejada.indexOf(a.position) -
+                     ordemDesejada.indexOf(b.position)
+               )
+               .map((player) => (
+                  <div
+                     key={player.name}
+                     onClick={() => moveToBench(player, teamKey)}
+                     style={{
+                        cursor: "pointer",
+                        margin: "4px",
+                        color: "white",
+                        opacity: "100%",
+                        fontFamily: `"League Gothic", sans-serif`,
+                        fontSize: "24px",
+                     }}
+                  >
+                     {player.name}
+                  </div>
+               ))}
          </div>
       </td>
    );
