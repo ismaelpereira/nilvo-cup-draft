@@ -73,8 +73,13 @@ const TeamDropCell: FC<{
                         opacity: "100%",
                         fontFamily: `"League Gothic", sans-serif`,
                         fontSize: "24px",
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: ".3em",
+                        alignItems: "center",
                      }}
                   >
+                     <img src={player.image} width="25px" height="25px" /> |{" "}
                      {player.name}
                   </div>
                ))}
