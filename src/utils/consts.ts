@@ -103,8 +103,8 @@ export const PLAYER_LIST: Player[] = [
       position: "Meia",
    },
    {
-      image: "player_images/Davi_C.png",
-      name: "Davi C",
+      image: "player_images/Gabriel_C.png",
+      name: "Gabriel C",
       position: "Meia",
    },
    {
@@ -213,8 +213,8 @@ export const PLAYER_LIST: Player[] = [
       position: "Goleiro",
    },
    {
-      image: "player_images/Pedro_Assis.png",
-      name: "Pedro Assis",
+      image: "player_images/Matilda.png",
+      name: "Matilda",
       position: "Goleiro",
    },
 ];

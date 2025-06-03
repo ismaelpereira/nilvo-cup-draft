@@ -52,7 +52,7 @@ const TeamDropCell: FC<{
             style={{
                ...style,
                backgroundColor: isActive ? "#3A3839" : "#424041",
-               width: "120px",
+               width: "140px",
             }}
          >
             <br />
@@ -68,18 +68,16 @@ const TeamDropCell: FC<{
                      onClick={() => moveToBench(player, teamKey)}
                      style={{
                         cursor: "pointer",
-                        margin: "4px",
+                        margin: "2px",
                         color: "white",
                         opacity: "100%",
                         fontFamily: `"League Gothic", sans-serif`,
                         fontSize: "24px",
                         display: "flex",
-                        justifyContent: "center",
                         gap: ".3em",
-                        alignItems: "center",
                      }}
                   >
-                     <img src={player.image} width="25px" height="25px" /> |{" "}
+                     <img src={player.image} width="25px" height="25px" />|{" "}
                      {player.name}
                   </div>
                ))}
