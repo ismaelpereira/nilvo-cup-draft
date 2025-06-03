@@ -93,9 +93,15 @@ function App() {
       localStorage.setItem(LOCAL_BENCH_KEY, JSON.stringify(benchPlayers));
    }, [benchPlayers]);
 
+   const clearCache = () => {
+      localStorage.clear();
+      location.reload();
+   };
+
    return (
       <div style={style}>
          <DndProvider backend={HTML5Backend}>
+            <button onClick={clearCache}>Limpar</button>
             <TeamTable
                teams={teams}
                moveToTeam={moveToTeam}
