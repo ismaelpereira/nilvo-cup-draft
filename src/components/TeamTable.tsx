@@ -1,133 +1,62 @@
-import { type FC, useEffect, useRef, type CSSProperties } from "react";
+import { type FC, useEffect, useRef } from "react";
 import { useDrop } from "react-dnd";
 import { ItemTypes, type Player, ordemDesejada } from "../utils/consts";
 
-const style: CSSProperties = {
-   color: "white",
-   padding: "1rem",
-   textAlign: "center",
-   fontSize: "1rem",
-   float: "left",
-   height: "500px",
-   backgroundColor: "#424041",
-};
-
 interface Props {
-   teams: Record<string, Player[]>;
-   moveToTeam: (player: Player, teamKey: string) => void;
-   moveToBench: (player: Player, teamKey: string) => void;
+  teams: Record<string, Player[]>;
+  moveToTeam: (player: Player, teamKey: string) => void;
+  moveToBench: (player: Player, teamKey: string) => void;
 }
 
-const TeamDropCell: FC<{
-   teamKey: string;
-   players: Player[];
-   moveToTeam: (player: Player, teamKey: string) => void;
-   moveToBench: (player: Player, teamKey: string) => void;
-}> = ({ teamKey, players, moveToTeam, moveToBench }) => {
-   const ref = useRef<HTMLDivElement>(null);
+const TeamCard: FC<{
+  teamKey: string;
+  teamNumber: number;
+  players: Player[];
+  moveToTeam: Props["moveToTeam"];
+  moveToBench: Props["moveToBench"];
+}> = ({ teamKey, teamNumber, players, moveToTeam, moveToBench }) => {
+  const ref = useRef<HTMLElement>(null);
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
+    accept: ItemTypes.BOX,
+    drop: (item: { player: Player }) => moveToTeam(item.player, teamKey),
+    collect: (monitor) => ({ isOver: monitor.isOver(), canDrop: monitor.canDrop() }),
+  }), [teamKey, moveToTeam]);
 
-   const [{ isOver, canDrop }, drop] = useDrop(() => ({
-      accept: ItemTypes.BOX,
-      drop: (item: { player: Player }) => {
-         moveToTeam(item.player, teamKey);
-      },
-      collect: (monitor) => ({
-         isOver: monitor.isOver(),
-         canDrop: monitor.canDrop(),
-      }),
-   }));
+  useEffect(() => {
+    if (ref.current) drop(ref.current);
+  }, [drop]);
 
-   useEffect(() => {
-      if (ref.current) {
-         drop(ref.current);
-      }
-   }, [drop]);
+  const sortedPlayers = [...players].sort(
+    (a, b) => ordemDesejada.indexOf(a.position) - ordemDesejada.indexOf(b.position),
+  );
 
-   const isActive = isOver && canDrop;
-
-   return (
-      <td>
-         <div
-            ref={ref}
-            style={{
-               ...style,
-               backgroundColor: isActive ? "#3A3839" : "#424041",
-               width: "140px",
-            }}
-         >
-            <br />
-            {players
-               .sort(
-                  (a, b) =>
-                     ordemDesejada.indexOf(a.position) -
-                     ordemDesejada.indexOf(b.position)
-               )
-               .map((player) => (
-                  <div
-                     key={player.name}
-                     onClick={() => moveToBench(player, teamKey)}
-                     style={{
-                        cursor: "pointer",
-                        margin: "2px",
-                        color: "white",
-                        opacity: "100%",
-                        fontFamily: `"League Gothic", sans-serif`,
-                        fontSize: "24px",
-                        display: "flex",
-                        gap: ".3em",
-                     }}
-                  >
-                     <img src={player.image} width="25px" height="25px" />|{" "}
-                     {player.name}
-                  </div>
-               ))}
-         </div>
-      </td>
-   );
-};
-
-export const TeamTable: FC<Props> = ({ teams, moveToTeam, moveToBench }) => {
-   const teamKeys = Object.keys(teams);
-
-   return (
-      <div
-         style={{
-            paddingTop: "3em",
-            display: "flex",
-            justifyContent: "center",
-         }}
-      >
-         <table>
-            <thead>
-               <tr>
-                  {teamKeys.map((key, i) => (
-                     <th
-                        key={key}
-                        style={{
-                           color: "white",
-                           fontFamily: `"League Gothic", sans-serif`,
-                           fontSize: "38px",
-                        }}
-                     >
-                        Time {i + 1}
-                     </th>
-                  ))}
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  {teamKeys.map((key) => (
-                     <TeamDropCell
-                        key={key}
-                        teamKey={key}
-                        players={teams[key]}
-                        moveToTeam={moveToTeam}
-                        moveToBench={moveToBench}
-                     />
-                  ))}
-               </tr>
-            </tbody>
-         </table>
+  return (
+    <article ref={ref} className={`team-card${isOver && canDrop ? " team-card-over" : ""}`}>
+      <header className="team-card-header">
+        <div className="team-name"><span className="team-emblem">{String(teamNumber).padStart(2, "0")}</span><h3>Time {teamNumber}</h3></div>
+        <span className="team-count">{players.length}<span> / 5</span></span>
+      </header>
+      <div className="team-roster" aria-label={`Jogadores do Time ${teamNumber}`}>
+        {sortedPlayers.map((player) => (
+          <button className="roster-player" key={player.name} onClick={() => moveToBench(player, teamKey)} type="button" title={`${player.name} — clique para devolver ao elenco`}>
+            <img src={player.image} alt="" loading="lazy" />
+            <span>{player.name}</span>
+            <span className="remove-player" aria-hidden="true">×</span>
+          </button>
+        ))}
+        {Array.from({ length: Math.max(0, 5 - players.length) }, (_, index) => (
+          <div className="roster-empty" key={`empty-${index}`}><span className="empty-plus" aria-hidden="true">＋</span><span>Vaga em aberto</span></div>
+        ))}
       </div>
-   );
+      <div className="team-card-foot"><span>ELENCO</span><span>{players.length === 5 ? "TIME COMPLETO" : `${5 - players.length} VAGA${5 - players.length === 1 ? "" : "S"}`}</span></div>
+    </article>
+  );
 };
+
+export const TeamTable: FC<Props> = ({ teams, moveToTeam, moveToBench }) => (
+  <div className="teams-grid">
+    {Object.entries(teams).map(([key, players], index) => (
+      <TeamCard key={key} teamKey={key} teamNumber={index + 1} players={players} moveToTeam={moveToTeam} moveToBench={moveToBench} />
+    ))}
+  </div>
+);

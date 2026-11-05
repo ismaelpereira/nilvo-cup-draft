@@ -1,108 +1,53 @@
-import { type CSSProperties, type FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes, type Player, type Position } from "../utils/consts";
-import bgplayer from "../../public/assets/player_card.png";
-
-const style: CSSProperties = {
-   border: "1px dashed white",
-   color: "white",
-   fontFamily: `"League Gothic", sans-serif`,
-   fontSize: "32px",
-   cursor: "move",
-   backgroundImage: `url(${bgplayer})`,
-   backgroundRepeat: "no-repeat",
-   height: "40px",
-   width: "200px",
-   paddingLeft: "0.3em",
-};
 
 const DraggablePlayer: FC<{ player: Player }> = ({ player }) => {
-   const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.BOX,
+    item: { player },
+    collect: (monitor) => ({ isDragging: monitor.isDragging() }),
+  }), [player]);
 
-   const [{ isDragging }, drag] = useDrag(() => ({
-      type: ItemTypes.BOX,
-      item: { player },
-      collect: (monitor) => ({
-         isDragging: monitor.isDragging(),
-      }),
-   }));
+  useEffect(() => {
+    if (ref.current) drag(ref.current);
+  }, [drag]);
 
-   useEffect(() => {
-      if (ref.current) {
-         drag(ref.current);
-      }
-   }, [drag]);
-
-   return (
-      <div
-         ref={ref}
-         style={{
-            ...style,
-            opacity: isDragging ? 0.4 : 1,
-         }}
-      >
-         <img src={player.image} width="20px" height="20px" /> | {player.name}
-      </div>
-   );
+  return (
+    <button ref={ref} className={`bench-player${isDragging ? " bench-player-dragging" : ""}`} type="button" aria-label={`Arraste ${player.name} para um time`}>
+      <span className="player-photo"><img src={player.image} alt={`Foto de ${player.name}`} loading="lazy" /></span>
+      <span className="player-info"><strong>{player.name}</strong><small>{player.position}</small></span>
+      <span className="player-drag-icon" aria-hidden="true">⠿</span>
+    </button>
+  );
 };
 
-interface Props {
-   benchPlayers: Player[];
-}
+interface Props { benchPlayers: Player[] }
 
 export const PlayerList: FC<Props> = ({ benchPlayers }) => {
-   const positions: Position[] = ["Atacante", "Meia", "Defensor", "Goleiro"];
+  const positions: Position[] = ["Atacante", "Meia", "Defensor", "Goleiro"];
+  const positionNumber: Record<Position, string> = { Atacante: "01", Meia: "02", Defensor: "03", Goleiro: "04" };
 
-   return (
-      <div
-         style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "",
-         }}
-      >
-         <div
-            style={{
-               display: "flex",
-               fontFamily: "Century Gothic",
-               gap: "2em",
-            }}
-         >
-            {positions.map((pos) => {
-               const players = benchPlayers.filter((p) => p.position === pos);
-               return (
-                  <div key={pos} style={{ clear: "both" }}>
-                     <h3
-                        style={{
-                           color: "white",
-                           fontFamily: `"League Gothic", sans-serif`,
-                           fontSize: "32px",
-                           textAlign: "center",
-                        }}
-                     >
-                        {pos}
-                     </h3>
-                     {players.length === 0 ? (
-                        <p
-                           style={{
-                              color: "#777",
-                              fontFamily: `"League Gothic", sans-serif`,
-                              fontSize: "24px",
-                           }}
-                        >
-                           Nenhum jogador
-                        </p>
-                     ) : (
-                        players.map((player) => (
-                           <DraggablePlayer key={player.name} player={player} />
-                        ))
-                     )}
-                  </div>
-               );
-            })}
-         </div>
+  return (
+    <section className="bench-section" aria-labelledby="bench-title">
+      <div className="section-heading bench-heading">
+        <div><span className="section-kicker">À DISPOSIÇÃO</span><h2 id="bench-title">Elenco de jogadores</h2></div>
+        <span className="bench-total"><strong>{benchPlayers.length}</strong> {benchPlayers.length === 1 ? "JOGADOR" : "JOGADORES"} LIVRES</span>
       </div>
-   );
+      <div className="position-grid">
+        {positions.map((position) => {
+          const players = benchPlayers.filter((player) => player.position === position);
+          return (
+            <section className="position-card" key={position} aria-labelledby={`position-${position}`}>
+              <header className="position-header"><span className="position-index">{positionNumber[position]}</span><h3 id={`position-${position}`}>{position}</h3><span className="position-count">{String(players.length).padStart(2, "0")}</span></header>
+              <div className="players-list">
+                {players.length ? players.map((player) => <DraggablePlayer key={player.name} player={player} />) : <p className="empty-bench">Todos os atletas desta posição já estão em campo.</p>}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </section>
+  );
 };
