@@ -1,164 +1,297 @@
-
 export type Position = "Atacante" | "Meia" | "Defensor" | "Goleiro";
+
+export type Pot = 1 | 2;
 
 export type Player = {
    name: string;
    image: string;
    position: Position;
+   pot?: Pot | null;
 };
 
 export const PLAYER_LIST: Player[] = [
    {
-      image: "player_images/Almeida.png",
-      name: "Almeida",
+      image: "player_images/Arthur.png",
+      name: "Arthur",
+      pot: 1,
       position: "Atacante",
    },
    {
-      image: "player_images/Coelho.png",
-      name: "Coelho",
+      image: "player_images/Borges.png",
+      name: "Borges",
+      pot: 1,
       position: "Atacante",
    },
    {
-      image: "player_images/davi_b.png",
-      name: "davi b",
+      image: "player_images/Henrique.png",
+      name: "Henrique",
+      pot: 1,
       position: "Atacante",
    },
    {
-      image: "player_images/Hiago.png",
-      name: "Hiago",
+      image: "player_images/Mayller.png",
+      name: "Mayller",
+      pot: 1,
       position: "Atacante",
    },
    {
-      image: "player_images/Lucas_Augusto.png",
-      name: "Lucas Augusto",
-      position: "Atacante",
-   },
-   {
-      image: "player_images/Osmir.png",
-      name: "Osmir",
-      position: "Atacante",
-   },
-   {
-      image: "player_images/Pedro_Bhering.png",
-      name: "Pedro Bhering",
+      image: "player_images/Victor_R.png",
+      name: "Victor R",
+      pot: 1,
       position: "Atacante",
    },
    {
       image: "player_images/Vinicius.png",
       name: "Vinícius",
+      pot: 1,
       position: "Atacante",
-   },
-   {
-      image: "player_images/Bruno_R.png",
-      name: "Bruno R",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Daniel_A.png",
-      name: "Daniel A",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Felipe_Bignoto.png",
-      name: "Felipe Bignoto",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Henrique_Carius.png",
-      name: "Henrique Cariús",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Hugo_A.png",
-      name: "Hugo A",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Lucas_T.png",
-      name: "Lucas T",
-      position: "Defensor",
-   },
-   {
-      image: "player_images/Rodrigo.png",
-      name: "Rodrigo",
-      position: "Defensor",
    },
    {
       image: "player_images/Yan.png",
       name: "Yan",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Almeida.png",
+      name: "Almeida",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Bellei.png",
+      name: "Bellei",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Chafei.png",
+      name: "Chafei",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Hugo.png",
+      name: "Hugo",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Pedro_A.png",
+      name: "Pedro A",
+      pot: 2,
+      position: "Atacante",
+   },
+   {
+      image: "player_images/Predo.png",
+      name: "Predo",
+      pot: 1,
       position: "Defensor",
    },
    {
-      image: "player_images/Borges.png",
-      name: "Borges",
-      position: "Goleiro",
+      image: "player_images/Rafael.png",
+      name: "Rafael",
+      pot: 1,
+      position: "Defensor",
    },
    {
-      image: "player_images/Carlos.png",
-      name: "Carlos",
-      position: "Goleiro",
+      image: "player_images/Brunin.png",
+      name: "Brunin",
+      pot: 1,
+      position: "Defensor",
    },
    {
-      image: "player_images/Fael.png",
-      name: "Fael",
-      position: "Goleiro",
+      image: "player_images/Esteban.png",
+      name: "Esteban",
+      pot: 1,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Gustavo.png",
+      name: "Gustavo",
+      pot: 1,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Leo_Donato.png",
+      name: "Leo Donato",
+      pot: 1,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Daniel_K.png",
+      name: "Daniel K",
+      pot: 2,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Davi_Valle.png",
+      name: "Davi Valle",
+      pot: 2,
+      position: "Defensor",
    },
    {
       image: "player_images/Pedro_Henrique.png",
       name: "Pedro Henrique",
+      pot: 2,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Fabrício.png",
+      name: "Fabrício",
+      pot: 2,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Hiago.png",
+      name: "Hiago",
+      pot: 2,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Romulo_S.png",
+      name: "Rômulo S",
+      pot: 2,
+      position: "Defensor",
+   },
+   {
+      image: "player_images/Carlos.png",
+      name: "Carlos",
+      pot: null,
+      position: "Goleiro",
+   },
+   {
+      image: "player_images/Davi_C.png",
+      name: "Davi C",
+      pot: null,
+      position: "Goleiro",
+   },
+   {
+      image: "player_images/Guga.png",
+      name: "Guga",
+      pot: null,
+      position: "Goleiro",
+   },
+   {
+      image: "player_images/Nilvo.png",
+      name: "Nilvo",
+      pot: null,
+      position: "Goleiro",
+   },
+   {
+      image: "player_images/Ronaldin.png",
+      name: "Ronaldin",
+      pot: null,
       position: "Goleiro",
    },
    {
       image: "player_images/Tote.png",
       name: "Tote",
+      pot: null,
       position: "Goleiro",
    },
    {
-      image: "player_images/Chafei.png",
-      name: "Chafei",
-      position: "Meia",
-   },
-   {
-      image: "player_images/Daniel_K.png",
-      name: "Daniel K",
-      position: "Meia",
-   },
-   {
-      image: "player_images/Esteban.png",
-      name: "Esteban",
-      position: "Meia",
-   },
-   {
-      image: "player_images/Gabriel_C.png",
-      name: "Gabriel C",
-      position: "Meia",
-   },
-   {
-      image: "player_images/Lent.png",
-      name: "Lent",
-      position: "Meia",
-   },
-   {
-      image: "player_images/Nilvo.png",
-      name: "Nilvo",
+      image: "player_images/Davi_B.png",
+      name: "Davi B",
+      pot: 1,
       position: "Meia",
    },
    {
       image: "player_images/PP.png",
       name: "PP",
+      pot: 1,
       position: "Meia",
    },
    {
-      image: "player_images/Tico.png",
-      name: "Tico",
+      image: "player_images/Daniel_A.png",
+      name: "Daniel A",
+      pot: 1,
       position: "Meia",
    },
    {
-      image: "player_images/Yves.png",
-      name: "Yves",
+      image: "player_images/Lucas_Augusto.png",
+      name: "Lucas Augusto",
+      pot: 1,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Lucas_T.png",
+      name: "Lucas T",
+      pot: 1,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Rick.png",
+      name: "Rick",
+      pot: 1,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Champz.png",
+      name: "Champz",
+      pot: 2,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Renan_B.png",
+      name: "Renan B",
+      pot: 2,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Bruno_R.png",
+      name: "Bruno R",
+      pot: 2,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Joao_Pedro.png",
+      name: "João Pedro",
+      pot: 2,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Otavio.png",
+      name: "Otávio",
+      pot: 2,
+      position: "Meia",
+   },
+   {
+      image: "player_images/Tiago_M.png",
+      name: "Tiago M",
+      pot: 2,
       position: "Meia",
    },
 ];
+
+export const TEAM_COUNT = 6;
+export const TEAM_ROSTER_SIZE = Math.ceil(PLAYER_LIST.length / TEAM_COUNT);
+
+export function canDraftPlayerIntoTeam(
+   team: Player[],
+   incoming: Player,
+): boolean {
+   if (
+      team.length >= TEAM_ROSTER_SIZE ||
+      team.some((player) => player.name === incoming.name)
+   ) {
+      return false;
+   }
+
+   if (incoming.position === "Atacante" && incoming.pot === 1) {
+      return !team.some(
+         (player) => player.position === "Atacante" && player.pot === 1,
+      );
+   }
+
+   if (incoming.position === "Meia" && incoming.pot === 2) {
+      return !team.some(
+         (player) => player.position === "Meia" && player.pot === 2,
+      );
+   }
+
+   return true;
+}
 
 export const ItemTypes = {
    BOX: "box",
@@ -168,4 +301,3 @@ export const LOCAL_TEAMS_KEY = "teams";
 export const LOCAL_BENCH_KEY = "benchPlayers";
 
 export const ordemDesejada = ["Goleiro", "Defensor", "Meia", "Atacante"];
-   

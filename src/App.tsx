@@ -7,11 +7,24 @@ import {
   LOCAL_BENCH_KEY,
   LOCAL_TEAMS_KEY,
   PLAYER_LIST,
+  TEAM_COUNT,
+  TEAM_ROSTER_SIZE,
+  canDraftPlayerIntoTeam,
   type Player,
 } from "./utils/consts";
 import "./styles.css";
 
-const TEAM_KEYS = ["team1", "team2", "team3", "team4", "team5", "team6"];
+const TEAM_KEYS = Array.from({ length: TEAM_COUNT }, (_, index) => `team${index + 1}`);
+const PLAYERS_BY_NAME = new Map(PLAYER_LIST.map((player) => [player.name, player]));
+
+function hydratePlayerPots(players: Player[]): Player[] {
+  return players.map((player) => {
+    const current = PLAYERS_BY_NAME.get(player.name);
+    return player.pot === undefined && current?.pot !== undefined
+      ? { ...player, pot: current.pot }
+      : player;
+  });
+}
 
 function isValidPlayerArray(data: unknown): data is Player[] {
   return Array.isArray(data) && data.every(
@@ -30,7 +43,7 @@ function readTeams(): Record<string, Player[]> {
     if (!parsed || typeof parsed !== "object") return getEmptyTeams();
     const teams = parsed as Record<string, unknown>;
     if (!TEAM_KEYS.every((key) => isValidPlayerArray(teams[key]))) return getEmptyTeams();
-    return Object.fromEntries(TEAM_KEYS.map((key) => [key, teams[key]]));
+    return Object.fromEntries(TEAM_KEYS.map((key) => [key, hydratePlayerPots(teams[key] as Player[])]));
   } catch {
     return getEmptyTeams();
   }
@@ -41,14 +54,18 @@ function App() {
     try {
       const saved = localStorage.getItem(LOCAL_BENCH_KEY);
       const parsed: unknown = saved ? JSON.parse(saved) : null;
-      return isValidPlayerArray(parsed) ? parsed : PLAYER_LIST;
+      return isValidPlayerArray(parsed) ? hydratePlayerPots(parsed) : PLAYER_LIST;
     } catch {
       return PLAYER_LIST;
     }
   });
   const [teams, setTeams] = useState<Record<string, Player[]>>(readTeams);
 
+  const canDropPlayer = (player: Player, teamKey: string) =>
+    canDraftPlayerIntoTeam(teams[teamKey] ?? [], player);
+
   const moveToTeam = (player: Player, teamKey: string) => {
+    if (!canDropPlayer(player, teamKey)) return;
     setBenchPlayers((current) => current.filter((candidate) => candidate.name !== player.name));
     setTeams((current) => ({
       ...current,
@@ -99,7 +116,7 @@ function App() {
               <p className="hero-tagline">“A verdadeira glória eterna!”</p>
               <p className="hero-description">Monte os times. Compartilhe a resenha.<br className="desktop-break" /> Que comece a disputa.</p>
             </div>
-            <div className="hero-stamp" aria-label="5ª edição da Copa Nilvo, seis times e trinta jogadores">
+            <div className="hero-stamp" aria-label="5ª edição da Copa Nilvo, seis times">
               <span className="stamp-top">COPA NILVO</span>
               <strong>5ª</strong>
               <span className="stamp-bottom">EDIÇÃO <i>•</i> 2026</span>
@@ -110,9 +127,9 @@ function App() {
           <section className="draft-section" aria-labelledby="teams-title">
             <div className="section-heading">
               <div><span className="section-kicker">A COMPETIÇÃO</span><h2 id="teams-title">Times do draft</h2></div>
-              <div className="section-tools"><span className="drag-hint"><span aria-hidden="true">↕</span> Arraste os jogadores para montar os times</span><button className="reset-button" onClick={clearDraft} type="button"><span aria-hidden="true">↺</span> Limpar draft</button></div>
+              <div className="section-tools"><span className="drag-hint"><span aria-hidden="true">↕</span> {TEAM_ROSTER_SIZE} por time · máx. 1 Atacante P1 e 1 Meia P2</span><button className="reset-button" onClick={clearDraft} type="button"><span aria-hidden="true">↺</span> Limpar draft</button></div>
             </div>
-            <TeamTable teams={teams} moveToTeam={moveToTeam} moveToBench={moveToBench} />
+            <TeamTable teams={teams} moveToTeam={moveToTeam} moveToBench={moveToBench} canDropPlayer={canDropPlayer} />
           </section>
 
           <PlayerList benchPlayers={benchPlayers} />
