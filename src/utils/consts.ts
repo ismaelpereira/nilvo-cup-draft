@@ -191,7 +191,7 @@ export const PLAYER_LIST: Player[] = [
       position: "Goleiro",
    },
    {
-      image: "player_images/Davi_B.png",
+      image: "player_images/davi_b.png",
       name: "Davi B",
       pot: 1,
       position: "Meia",

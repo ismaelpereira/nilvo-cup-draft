@@ -74,7 +74,7 @@ main { max-width: 1440px; margin: auto; padding: 0 5.4vw; }
 .roster-player { position: relative; color: #f3f3ee; background: rgba(255,255,255,.055); cursor: pointer; transition: background .15s; }
 .roster-player:hover,.roster-player:focus-visible { z-index: 4; background: rgba(199,166,91,.2); }
 .roster-player img { width: 24px; height: 24px; flex: 0 0 24px; border: 1px solid rgba(199,166,91,.5); border-radius: 50%; object-fit: cover; object-position: center 24%; background: #303030; transition: transform .18s ease; transform-origin: center; }
-.roster-player:hover img,.roster-player:focus-visible img { position: relative; z-index: 5; transform: scale(2); }
+.roster-player:hover img,.roster-player:focus-visible img { position: relative; z-index: 5; transform: scale(2.2); }
 .roster-player>span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 600; }
 .remove-player { display: none; margin-left: auto; color: var(--gold); font-size: 17px; }
 .roster-player:hover .remove-player,.roster-player:focus-visible .remove-player { display: inline; }
@@ -99,9 +99,11 @@ main { max-width: 1440px; margin: auto; padding: 0 5.4vw; }
 .bench-player:active { cursor: grabbing; }
 .bench-player-dragging { opacity: .32; }
 .player-photo { position: relative; width: 43px; height: 43px; flex: 0 0 43px; overflow: hidden; border-radius: 50%; background: linear-gradient(145deg,#c7a65b,#8d713c); box-shadow: 0 0 0 2px #29251d; transform-origin: center; transition: transform .18s ease; }
-.bench-player:hover .player-photo,.bench-player:focus-visible .player-photo { z-index: 5; transform: scale(1.7); }
+.bench-player:hover .player-photo,.bench-player:focus-visible .player-photo { z-index: 5; transform: scale(1.8); }
 .player-photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1px solid rgba(248,248,242,.25); pointer-events: none; }
 .player-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.bench-player:hover .player-photo img,.bench-player:focus-visible .player-photo img { transform: scale(1.12); }
+.bench-player:hover .player-photo--fullbody img,.bench-player:focus-visible .player-photo--fullbody img { transform: scale(1.45); }
 .player-info { min-width: 0; display: grid; gap: 3px; }
 .player-info strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 700; }
 .player-info small { color: #a4a49e; font-size: 9px; }

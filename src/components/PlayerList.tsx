@@ -20,7 +20,7 @@ const DraggablePlayer: FC<{ player: Player }> = ({ player }) => {
 
   return (
     <button ref={ref} className={`bench-player${isDragging ? " bench-player-dragging" : ""}`} type="button" aria-label={`Arraste ${player.name}, ${potLabel}, para um time`}>
-      <span className="player-photo"><img src={player.image} alt={`Foto de ${player.name}`} loading="lazy" /></span>
+      <span className={`player-photo${player.name === "Davi B" ? " player-photo--fullbody" : ""}`}><img src={player.image} alt={`Foto de ${player.name}`} loading="lazy" /></span>
       <span className="player-info"><strong>{player.name}</strong><small>{potLabel}</small></span>
       <span className="player-drag-icon" aria-hidden="true">⠿</span>
     </button>
