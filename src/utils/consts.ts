@@ -137,7 +137,7 @@ export const PLAYER_LIST: Player[] = [
       position: "Defensor",
    },
    {
-      image: "player_images/Fabrício.png",
+      image: "player_images/Fabricio.png",
       name: "Fabrício",
       pot: 2,
       position: "Defensor",
