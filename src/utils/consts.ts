@@ -278,15 +278,14 @@ export function canDraftPlayerIntoTeam(
       return false;
    }
 
-   if (incoming.position === "Atacante" && incoming.pot === 1) {
-      return !team.some(
-         (player) => player.position === "Atacante" && player.pot === 1,
-      );
+   if (incoming.position === "Goleiro") {
+      return !team.some((player) => player.position === "Goleiro");
    }
 
-   if (incoming.position === "Meia" && incoming.pot === 2) {
+   if (incoming.pot != null) {
       return !team.some(
-         (player) => player.position === "Meia" && player.pot === 2,
+         (player) =>
+            player.position === incoming.position && player.pot === incoming.pot,
       );
    }
 

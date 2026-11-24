@@ -127,7 +127,7 @@ function App() {
           <section className="draft-section" aria-labelledby="teams-title">
             <div className="section-heading">
               <div><span className="section-kicker">A COMPETIÇÃO</span><h2 id="teams-title">Times do draft</h2></div>
-              <div className="section-tools"><span className="drag-hint"><span aria-hidden="true">↕</span> {TEAM_ROSTER_SIZE} por time · máx. 1 Atacante P1 e 1 Meia P2</span><button className="reset-button" onClick={clearDraft} type="button"><span aria-hidden="true">↺</span> Limpar draft</button></div>
+              <div className="section-tools"><span className="drag-hint"><span aria-hidden="true">↕</span> {TEAM_ROSTER_SIZE} por time · 1 por posição e pote · 1 goleiro</span><button className="reset-button" onClick={clearDraft} type="button"><span aria-hidden="true">↺</span> Limpar draft</button></div>
             </div>
             <TeamTable teams={teams} moveToTeam={moveToTeam} moveToBench={moveToBench} canDropPlayer={canDropPlayer} />
           </section>
